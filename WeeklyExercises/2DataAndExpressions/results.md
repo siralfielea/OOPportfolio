@@ -1,3 +1,4 @@
+# Lab
 ```
 Enter a password to check: 
 Password1!
@@ -9,3 +10,4 @@ poop
 Password must be at least 8 characters
 ```
 ---
+# Exercises
