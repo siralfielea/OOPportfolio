@@ -6,19 +6,25 @@ public class PasswordChecker {
         System.out.println("Enter a password to check: ");
         Scanner sc = new Scanner(System.in);
         String password = sc.nextLine();
+        int passwordChecks = 0;
         if (password.length() < 8) {
             System.out.println("Password must be at least 8 characters");
-        } else if (!(doesStringContainLowercaseLetter(password) && doesStringContainUppercaseLetter(password))) {
-            System.out.println("Password does not contain lower case and uppercase letters");
-            if (!(doesStringContainSpecialCharacter(password))){
-                System.out.println("Password does not contain special characters");
-            } else {
-                if (!doesStringContainANumber(password)) {
-                    System.out.println("Password doesnt contain a number");
-                }
-            }
+        }else passwordChecks++;
+        if (!doesStringContainANumber(password)){
+            System.out.println("Password must contain at least 1 number");
+        }else passwordChecks++;
+        if (!doesStringContainSpecialCharacter(password)){
+            System.out.println("Password must contain at least 1 special character");
+        }else passwordChecks++;
+        if (!doesStringContainLowercaseLetter(password)){
+            System.out.println("Password must contain at least 1 lowercase letter");
+        }else passwordChecks++;
+        if (!doesStringContainUppercaseLetter(password)){
+            System.out.println("Password must contain at least 1 uppercase letter");
+        }else passwordChecks++;
+        if (passwordChecks == 5) {
+            System.out.println("Password check passes, your password is pretty good :)");
         }
-        else System.out.println("Your password " + password + " is checked and good");
             }
 
     private static boolean doesStringContainANumber(String string) {
@@ -32,11 +38,12 @@ public class PasswordChecker {
 
 
     private static boolean doesStringContainSpecialCharacter(String string) {
+        int specialCharacterCount = 0;
         for (int i = 0; i < string.length(); i++) {
             char ch = string.charAt(i);
-            if (Character.isLetterOrDigit(ch)) return true;
+            if (!Character.isLetterOrDigit(ch)) specialCharacterCount++;
         }
-        return false;
+        return specialCharacterCount >= 1;
     }
 
     private static boolean doesStringContainLowercaseLetter(String string) {
